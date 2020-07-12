@@ -8,51 +8,48 @@ import { CovidDataService } from '../covid-data.service';
 })
 export class TableComponent implements OnInit {
 
-  confirmed = 0;
-  recovered = 0;
-  deaths = 0;
+  confirm = 0;
+  recover = 0;
+  death = 0;
   active = 0;
 
 
-  items = [];
-  confirmedItem = [];
-  recoveredItem = [];
-  deathItem = [];
+  case = [];
+  cfcase = [];
+  rccase = [];
+  dcase = [];
   stateLabel = [];
   dataItem = [];
-  activeItem = [];
+  activecase = [];
   constructor(private ds: CovidDataService) {
     this.ds.getService().subscribe(
       data => {
-        this.items = data;
-        console.log(this.items[0].confirmed);
+        this.case = data;
+        console.log(this.case[0].confirmed);
         for (let i = 0; i < data.length; i++) {
-          this.stateLabel.push(this.items[i].provinceState);
-          this.confirmedItem.push(this.items[i].confirmed);
-          this.recoveredItem.push(this.items[i].recovered);
-          this.deathItem.push(this.items[i].deaths);
-          this.activeItem.push(this.items[i].active);
-          this.confirmed = this.confirmed + this.items[i].confirmed;
-          this.recovered = this.recovered + this.items[i].recovered;
-          this.deaths = this.deaths + this.items[i].deaths;
-          this.active = this.active + this.items[i].active;
+          this.stateLabel.push(this.case[i].provinceState);
+          this.cfcase.push(this.case[i].confirmed);
+          this.rccase.push(this.case[i].recovered);
+          this.dcase.push(this.case[i].deaths);
+          this.activecase.push(this.case[i].active);
+          this.confirm = this.confirm + this.case[i].confirmed;
+          this.recover = this.recover + this.case[i].recovered;
+          this.death = this.death + this.case[i].deaths;
+          this.active = this.active + this.case[i].active;
         }
-        this.dataItem.push(this.confirmed);
-        this.dataItem.push(this.recovered);
-        this.dataItem.push(this.deaths);
+        this.dataItem.push(this.confirm);
+        this.dataItem.push(this.recover);
+        this.dataItem.push(this.death);
         this.dataItem.push(this.active)
-        console.log(this.confirmed);
-        console.log(this.recovered);
-        console.log(this.deaths);
-        console.log(this.items)
+        console.log(this.confirm);
+        console.log(this.recover);
+        console.log(this.death);
+        console.log(this.case);
       },
       err => console.log("error", err),
       () => console.log("finally")
     )
   }
-
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit():void{}
 }
+
